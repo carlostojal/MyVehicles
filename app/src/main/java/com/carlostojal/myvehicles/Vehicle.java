@@ -13,15 +13,17 @@ public class Vehicle {
     private int type; //1 - Car; 2 - Motorcycle; 3 - Other
     private String brand;
     private String model;
+    private int displacement;
     private int year;
     private String registration;
     private ArrayList<InsuranceInspectionTax> insurance;
     private ArrayList<InsuranceInspectionTax> inspection;
 
-    public Vehicle(int type, String brand, String model, int year, String registration, ArrayList<InsuranceInspectionTax> insurance, ArrayList<InsuranceInspectionTax> inspection) {
+    public Vehicle(int type, String brand, String model, int displacement, int year, String registration, ArrayList<InsuranceInspectionTax> insurance, ArrayList<InsuranceInspectionTax> inspection) {
         this.type = type;
         this.brand = brand;
         this.model = model;
+        this.displacement = displacement;
         this.year = year;
         this.registration = registration;
         this.insurance = insurance;
@@ -50,6 +52,14 @@ public class Vehicle {
 
     public void setModel(String model) {
         this.model = model;
+    }
+
+    public int getDisplacement() {
+        return displacement;
+    }
+
+    public void setDisplacement(int displacement) {
+        this.displacement = displacement;
     }
 
     public int getYear() {
