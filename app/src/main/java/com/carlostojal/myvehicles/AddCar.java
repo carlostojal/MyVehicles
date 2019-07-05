@@ -54,21 +54,21 @@ public class AddCar extends AppCompatActivity {
         InsuranceInspectionTax newInsurance;
         ArrayList<InsuranceInspectionTax> insurance = new ArrayList<>();
         Date insuranceDate = new Date(0,0,0);
-        int insuranceValue = 0;
+        float insuranceValue = 0;
         newInsurance = new InsuranceInspectionTax(insuranceDate,insuranceValue);
         insurance.add(newInsurance);
 
         InsuranceInspectionTax newInspection;
         ArrayList<InsuranceInspectionTax> inspection = new ArrayList<>();
         Date inspectionDate = new Date(0,0,0);
-        int inspectionValue = 0;
+        float inspectionValue = 0;
         newInspection = new InsuranceInspectionTax(inspectionDate,inspectionValue);
         inspection.add(newInspection);
 
         InsuranceInspectionTax newTax;
         ArrayList<InsuranceInspectionTax> tax = new ArrayList<>();
         Date taxDate = new Date(0,0,0);
-        int taxValue = 0;
+        float taxValue = 0;
         newTax = new InsuranceInspectionTax(taxDate,taxValue);
         tax.add(newTax);
 

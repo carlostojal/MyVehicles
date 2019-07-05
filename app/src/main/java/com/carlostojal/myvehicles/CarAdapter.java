@@ -11,16 +11,18 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class CarAdapter {
+public class CarAdapter extends ArrayAdapter<Vehicle> {
 
     private final Context context;
     private final ArrayList<Vehicle> cars;
 
     public CarAdapter(Context context, ArrayList<Vehicle> cars) {
+        super(context,R.layout.vehicle,cars);
         this.context = context;
         this.cars = cars;
     }

@@ -9,9 +9,9 @@ package com.carlostojal.myvehicles;
 
 public class InsuranceInspectionTax {
     Date date;
-    int value;
+    float value;
 
-    public InsuranceInspectionTax(Date date, int value) {
+    public InsuranceInspectionTax(Date date, float value) {
         this.date = date;
         this.date = date;
         this.value = value;
@@ -25,11 +25,11 @@ public class InsuranceInspectionTax {
         this.date = date;
     }
 
-    public int getValue() {
+    public float getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(float value) {
         this.value = value;
     }
 }

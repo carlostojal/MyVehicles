@@ -18,18 +18,33 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class Cars extends Fragment {
 
-    ArrayList<Vehicle> cars;
-    Button addCar;
+    private ListView carList;
+    private VehicleManager vehicleManager = new VehicleManager();
+    private ArrayList<Vehicle> cars;
+    private Button addCar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cars, container, false);
+
+        cars = vehicleManager.loadCars(getContext());
+        /*
+        if(cars.size()==0)
+            Toast.makeText(getContext(), "No cars were found.", Toast.LENGTH_SHORT).show();*/
+
+        carList = view.findViewById(R.id.car_list);
+        ArrayAdapter carAdapter = new CarAdapter(getContext(),cars);
+        carList.setAdapter(carAdapter);
+
         addCar = (Button) view.findViewById(R.id.add_car);
         addCar.setOnClickListener(new View.OnClickListener() {
             @Override
