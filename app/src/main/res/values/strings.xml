@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">MyVehicles</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_car">Add Car</string>
+    <string name="add_motorcycle">Add Motorcycle</string>
+    <string name="add_vehicle">Add Vehicle</string>
+    <string name="title_activity_add_car">AddCar</string>
+    <string name="brand">Brand (obligatory):</string>
+    <string name="model">Model (obligatory):</string>
+    <string name="displacement">Displacement:</string>
+    <string name="year">Year:</string>
+    <string name="registration">Registration (obligatory):</string>
 </resources>

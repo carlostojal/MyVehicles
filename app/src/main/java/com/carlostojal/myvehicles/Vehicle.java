@@ -18,8 +18,9 @@ public class Vehicle {
     private String registration;
     private ArrayList<InsuranceInspectionTax> insurance;
     private ArrayList<InsuranceInspectionTax> inspection;
+    private ArrayList<InsuranceInspectionTax> tax;
 
-    public Vehicle(int type, String brand, String model, int displacement, int year, String registration, ArrayList<InsuranceInspectionTax> insurance, ArrayList<InsuranceInspectionTax> inspection) {
+    public Vehicle(int type, String brand, String model, int displacement, int year, String registration, ArrayList<InsuranceInspectionTax> insurance, ArrayList<InsuranceInspectionTax> inspection, ArrayList<InsuranceInspectionTax> tax) {
         this.type = type;
         this.brand = brand;
         this.model = model;
@@ -28,6 +29,7 @@ public class Vehicle {
         this.registration = registration;
         this.insurance = insurance;
         this.inspection = inspection;
+        this.tax = tax;
     }
 
     public int getType() {
@@ -92,5 +94,13 @@ public class Vehicle {
 
     public void setInspection(ArrayList<InsuranceInspectionTax> inspection) {
         this.inspection = inspection;
+    }
+
+    public ArrayList<InsuranceInspectionTax> getTax() {
+        return tax;
+    }
+
+    public void setTax(ArrayList<InsuranceInspectionTax> tax) {
+        this.tax = tax;
     }
 }

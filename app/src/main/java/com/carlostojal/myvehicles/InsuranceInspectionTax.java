@@ -8,28 +8,28 @@ package com.carlostojal.myvehicles;
 //
 
 public class InsuranceInspectionTax {
-    Date[] date;
-    int[] value;
+    Date date;
+    int value;
 
-    public InsuranceInspectionTax(Date[] date, int[] value) {
+    public InsuranceInspectionTax(Date date, int value) {
         this.date = date;
         this.date = date;
         this.value = value;
     }
 
-    public Date[] getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Date[] date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    public int[] getValue() {
+    public int getValue() {
         return value;
     }
 
-    public void setValue(int[] value) {
+    public void setValue(int value) {
         this.value = value;
     }
 }
