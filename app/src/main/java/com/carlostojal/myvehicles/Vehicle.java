@@ -16,11 +16,12 @@ public class Vehicle {
     private int displacement;
     private int year;
     private String registration;
-    private ArrayList<InsuranceInspectionTax> insurance;
-    private ArrayList<InsuranceInspectionTax> inspection;
-    private ArrayList<InsuranceInspectionTax> tax;
+    private ArrayList<InsuranceInspectionTaxRevision> insurance;
+    private ArrayList<InsuranceInspectionTaxRevision> inspection;
+    private ArrayList<InsuranceInspectionTaxRevision> tax;
+    private ArrayList<InsuranceInspectionTaxRevision> revision;
 
-    public Vehicle(int type, String brand, String model, int displacement, int year, String registration, ArrayList<InsuranceInspectionTax> insurance, ArrayList<InsuranceInspectionTax> inspection, ArrayList<InsuranceInspectionTax> tax) {
+    public Vehicle(int type, String brand, String model, int displacement, int year, String registration, ArrayList<InsuranceInspectionTaxRevision> insurance, ArrayList<InsuranceInspectionTaxRevision> inspection, ArrayList<InsuranceInspectionTaxRevision> tax, ArrayList<InsuranceInspectionTaxRevision> revision) {
         this.type = type;
         this.brand = brand;
         this.model = model;
@@ -30,6 +31,7 @@ public class Vehicle {
         this.insurance = insurance;
         this.inspection = inspection;
         this.tax = tax;
+        this.revision = revision;
     }
 
     public int getType() {
@@ -80,27 +82,35 @@ public class Vehicle {
         this.registration = registration;
     }
 
-    public ArrayList<InsuranceInspectionTax> getInsurance() {
+    public ArrayList<InsuranceInspectionTaxRevision> getInsurance() {
         return insurance;
     }
 
-    public void setInsurance(ArrayList<InsuranceInspectionTax> insurance) {
+    public void setInsurance(ArrayList<InsuranceInspectionTaxRevision> insurance) {
         this.insurance = insurance;
     }
 
-    public ArrayList<InsuranceInspectionTax> getInspection() {
+    public ArrayList<InsuranceInspectionTaxRevision> getInspection() {
         return inspection;
     }
 
-    public void setInspection(ArrayList<InsuranceInspectionTax> inspection) {
+    public void setInspection(ArrayList<InsuranceInspectionTaxRevision> inspection) {
         this.inspection = inspection;
     }
 
-    public ArrayList<InsuranceInspectionTax> getTax() {
+    public ArrayList<InsuranceInspectionTaxRevision> getTax() {
         return tax;
     }
 
-    public void setTax(ArrayList<InsuranceInspectionTax> tax) {
+    public void setTax(ArrayList<InsuranceInspectionTaxRevision> tax) {
         this.tax = tax;
+    }
+
+    public ArrayList<InsuranceInspectionTaxRevision> getRevision() {
+        return revision;
+    }
+
+    public void setRevision(ArrayList<InsuranceInspectionTaxRevision> revision) {
+        this.revision = revision;
     }
 }

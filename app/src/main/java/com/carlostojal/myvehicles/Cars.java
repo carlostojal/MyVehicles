@@ -37,9 +37,8 @@ public class Cars extends Fragment {
         View view = inflater.inflate(R.layout.fragment_cars, container, false);
 
         cars = vehicleManager.loadCars(getContext());
-        /*
         if(cars.size()==0)
-            Toast.makeText(getContext(), "No cars were found.", Toast.LENGTH_SHORT).show();*/
+            Toast.makeText(getContext(), "No cars were found.", Toast.LENGTH_SHORT).show();
 
         carList = view.findViewById(R.id.car_list);
         ArrayAdapter carAdapter = new CarAdapter(getContext(),cars);

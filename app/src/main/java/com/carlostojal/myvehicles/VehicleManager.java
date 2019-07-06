@@ -35,19 +35,19 @@ public class VehicleManager {
     public boolean addVehicle(Context context,Vehicle newVehicle) {
         try {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("vehicles.csv",Context.MODE_APPEND));
-            outputStreamWriter.write(newVehicle.getType()); //type
+            outputStreamWriter.write(String.valueOf(newVehicle.getType())); //type
             outputStreamWriter.write("; ");
             outputStreamWriter.write(newVehicle.getBrand()); //brand
             outputStreamWriter.write("; ");
             outputStreamWriter.write(newVehicle.getModel()); //model
             outputStreamWriter.write("; ");
-            outputStreamWriter.write(newVehicle.getDisplacement()); //displacement
+            outputStreamWriter.write(String.valueOf(newVehicle.getDisplacement())); //displacement
             outputStreamWriter.write("; ");
-            outputStreamWriter.write(newVehicle.getYear()); //year
+            outputStreamWriter.write(String.valueOf(newVehicle.getYear())); //year
             outputStreamWriter.write("; ");
             outputStreamWriter.write(newVehicle.getRegistration()); //registration
             outputStreamWriter.write("; ");
-            outputStreamWriter.write(newVehicle.getInsurance().size());
+            outputStreamWriter.write(String.valueOf(newVehicle.getInsurance().size()));
             for(int i=0;i<newVehicle.getInsurance().size();i++) { //insurance
                 outputStreamWriter.write("; ");
                 outputStreamWriter.write(String.valueOf(newVehicle.getInsurance().get(i).getDate().getDay()));
@@ -59,7 +59,7 @@ public class VehicleManager {
                 outputStreamWriter.write(String.valueOf(newVehicle.getInsurance().get(i).getValue()));
             }
             outputStreamWriter.write("; ");
-            outputStreamWriter.write(newVehicle.getInspection().size());
+            outputStreamWriter.write(String.valueOf(newVehicle.getInspection().size()));
             for(int i=0;i<newVehicle.getInspection().size();i++) { //inspection
                 outputStreamWriter.write("; ");
                 outputStreamWriter.write(String.valueOf(newVehicle.getInspection().get(i).getDate().getDay()));
@@ -71,7 +71,7 @@ public class VehicleManager {
                 outputStreamWriter.write(String.valueOf(newVehicle.getInspection().get(i).getValue()));
             }
             outputStreamWriter.write("; ");
-            outputStreamWriter.write(newVehicle.getTax().size());
+            outputStreamWriter.write(String.valueOf(newVehicle.getTax().size()));
             for(int i=0;i<newVehicle.getTax().size();i++) { //tax
                 outputStreamWriter.write("; ");
                 outputStreamWriter.write(String.valueOf(newVehicle.getTax().get(i).getDate().getDay()));
@@ -81,6 +81,18 @@ public class VehicleManager {
                 outputStreamWriter.write(String.valueOf(newVehicle.getTax().get(i).getDate().getYear()));
                 outputStreamWriter.write("; ");
                 outputStreamWriter.write(String.valueOf(newVehicle.getTax().get(i).getValue()));
+            }
+            outputStreamWriter.write("; ");
+            outputStreamWriter.write(String.valueOf(newVehicle.getRevision().size()));
+            for(int i=0;i<newVehicle.getRevision().size();i++) { //revision
+                outputStreamWriter.write("; ");
+                outputStreamWriter.write(String.valueOf(newVehicle.getRevision().get(i).getDate().getDay()));
+                outputStreamWriter.write("; ");
+                outputStreamWriter.write(String.valueOf(newVehicle.getRevision().get(i).getDate().getMonth()));
+                outputStreamWriter.write("; ");
+                outputStreamWriter.write(String.valueOf(newVehicle.getRevision().get(i).getDate().getYear()));
+                outputStreamWriter.write("; ");
+                outputStreamWriter.write(String.valueOf(newVehicle.getRevision().get(i).getValue()));
             }
             outputStreamWriter.write("\n");
             outputStreamWriter.close();
@@ -110,15 +122,17 @@ public class VehicleManager {
             int year;
             String registration;
             int ninsurances;
-            ArrayList<InsuranceInspectionTax> insurance = new ArrayList<>();
+            ArrayList<InsuranceInspectionTaxRevision> insurance = new ArrayList<>();
             int ninspections;
-            ArrayList<InsuranceInspectionTax> inspection = new ArrayList<>();
+            ArrayList<InsuranceInspectionTaxRevision> inspection = new ArrayList<>();
             int ntaxes;
-            ArrayList<InsuranceInspectionTax> tax = new ArrayList<>();
+            ArrayList<InsuranceInspectionTaxRevision> tax = new ArrayList<>();
+            int nrevisions;
+            ArrayList<InsuranceInspectionTaxRevision> revision = new ArrayList<>();
             StringBuilder stringBuilder = new StringBuilder();
             while((line=bufferedReader.readLine())!=null) {
                 stringBuilder.append(line);
-                /*
+                stringBuilder.append("\n");
                 String[] splitStr = line.split("; ");
                 type = Integer.parseInt(splitStr[0]);
                 brand = splitStr[1];
@@ -136,7 +150,7 @@ public class VehicleManager {
                     dateYear = Integer.parseInt(splitStr[j+2]);
                     Date insuranceDate = new Date(dateDay,dateMonth,dateYear);
                     value = Float.parseFloat(splitStr[j+3]);
-                    InsuranceInspectionTax newInsurance = new InsuranceInspectionTax(insuranceDate,value);
+                    InsuranceInspectionTaxRevision newInsurance = new InsuranceInspectionTaxRevision(insuranceDate,value);
                     insurance.add(newInsurance);
                     j+=4;
                 }
@@ -150,7 +164,7 @@ public class VehicleManager {
                     dateYear = Integer.parseInt(splitStr[j+2]);
                     Date inspectionDate = new Date(dateDay,dateMonth,dateYear);
                     value = Float.parseFloat(splitStr[j+3]);
-                    InsuranceInspectionTax newInspection = new InsuranceInspectionTax(inspectionDate,value);
+                    InsuranceInspectionTaxRevision newInspection = new InsuranceInspectionTaxRevision(inspectionDate,value);
                     inspection.add(newInspection);
                     j+=4;
                 }
@@ -164,17 +178,31 @@ public class VehicleManager {
                     dateYear = Integer.parseInt(splitStr[j+2]);
                     Date taxDate = new Date(dateDay,dateMonth,dateYear);
                     value = Float.parseFloat(splitStr[j+3]);
-                    InsuranceInspectionTax newTax = new InsuranceInspectionTax(taxDate,value);
+                    InsuranceInspectionTaxRevision newTax = new InsuranceInspectionTaxRevision(taxDate,value);
                     tax.add(newTax);
+                    j+=4;
+                }
+                nrevisions = Integer.parseInt(splitStr[j]);
+                j++;
+                for(i=0;i<nrevisions;i++) {
+                    int dateDay, dateMonth, dateYear;
+                    float value;
+                    dateDay = Integer.parseInt(splitStr[j]);
+                    dateMonth = Integer.parseInt(splitStr[j+1]);
+                    dateYear = Integer.parseInt(splitStr[j+2]);
+                    Date revisionDate = new Date(dateDay,dateMonth,dateYear);
+                    value = Float.parseFloat(splitStr[j+3]);
+                    InsuranceInspectionTaxRevision newRevision = new InsuranceInspectionTaxRevision(revisionDate,value);
+                    tax.add(newRevision);
                     if(j+4<splitStr.length)
                         j+=4;
                     else break;
                 }
 
                 if(type==1) {
-                    Vehicle vehicle = new Vehicle(type, brand, model, displacement, year, registration, insurance, inspection, tax);
+                    Vehicle vehicle = new Vehicle(type, brand, model, displacement, year, registration, insurance, inspection, tax, revision);
                     cars.add(vehicle);
-                }*/
+                }
                 Toast.makeText(context, stringBuilder, Toast.LENGTH_SHORT).show();
             }
         } catch (FileNotFoundException e) {

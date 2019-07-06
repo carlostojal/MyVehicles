@@ -2,16 +2,16 @@ package com.carlostojal.myvehicles;
 
 //
 // Copyright © Carlos Tojal (carlostojal)
-// InsuranceInspectionTax.java
+// InsuranceInspectionTaxRevision.java
 // MyVehicles
 // github.com/carlostojal/MyVehicles
 //
 
-public class InsuranceInspectionTax {
+public class InsuranceInspectionTaxRevision {
     Date date;
     float value;
 
-    public InsuranceInspectionTax(Date date, float value) {
+    public InsuranceInspectionTaxRevision(Date date, float value) {
         this.date = date;
         this.date = date;
         this.value = value;
