@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".AddCar"
+        tools:context=".AddVehicle"
         android:id="@+id/coordinatorLayout">
 
         <TextView
@@ -122,14 +122,14 @@
             app:layout_constraintTop_toBottomOf="@+id/registration" />
 
         <Button
-            android:id="@+id/add_car"
+            android:id="@+id/add_vehicle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
             android:background="@color/colorPrimary"
-            android:onClick="onAddCar"
+            android:onClick="onAddVehicle"
             android:text="@string/add_car"
             android:textColor="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"

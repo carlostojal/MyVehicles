@@ -7,10 +7,7 @@ package com.carlostojal.myvehicles;
 // github.com/carlostojal/MyVehicles
 //
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -28,7 +25,7 @@ import java.util.ArrayList;
 public class Cars extends Fragment {
 
     private ListView carList;
-    private VehicleManager vehicleManager = new VehicleManager();
+    private VehicleManager vehicleManager;
     private ArrayList<Vehicle> cars;
     private Button addCar;
 
@@ -36,7 +33,8 @@ public class Cars extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cars, container, false);
 
-        cars = vehicleManager.loadCars(getContext());
+        vehicleManager = new VehicleManager();
+        cars = vehicleManager.loadVehicles(getContext(),1);
         if(cars.size()==0)
             Toast.makeText(getContext(), "No cars were found.", Toast.LENGTH_SHORT).show();
 
@@ -44,7 +42,7 @@ public class Cars extends Fragment {
         ArrayAdapter carAdapter = new CarAdapter(getContext(),cars);
         carList.setAdapter(carAdapter);
 
-        addCar = (Button) view.findViewById(R.id.add_car);
+        addCar = (Button) view.findViewById(R.id.add_vehicle);
         addCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,7 +56,8 @@ public class Cars extends Fragment {
 
 
     public void onAddCar() {
-        Intent intent = new Intent(getContext(),AddCar.class);
+        Intent intent = new Intent(getContext(), AddVehicle.class);
+        intent.putExtra("type",1);
         startActivity(intent);
     }
 }

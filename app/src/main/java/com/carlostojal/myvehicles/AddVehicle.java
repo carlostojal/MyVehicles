@@ -2,7 +2,7 @@ package com.carlostojal.myvehicles;
 
 //
 // Copyright © Carlos Tojal (carlostojal)
-// AddCar.java
+// AddVehicle.java
 // MyVehicles
 // github.com/carlostojal/MyVehicles
 //
@@ -12,29 +12,54 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class AddCar extends AppCompatActivity {
+public class AddVehicle extends AppCompatActivity {
+
+    int type;
+    EditText brand;
+    EditText model;
+    EditText displacement;
+    EditText year;
+    EditText registration;
+    Button addVehicle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_car);
+        setContentView(R.layout.activity_add_vehicle);
 
-        setTitle("Add Car");
+        brand = (EditText) findViewById(R.id.brand_field);
+        model = (EditText) findViewById(R.id.model_field);
+        displacement = (EditText) findViewById(R.id.displacement_field);
+        year = (EditText) findViewById(R.id.year_field);
+        registration = (EditText) findViewById(R.id.registration_field);
+        addVehicle = (Button) findViewById(R.id.add_vehicle);
+
+        Bundle extras = getIntent().getExtras();
+        if(extras != null)
+            type = extras.getInt("type");
+
+        if(type==1) {
+            setTitle("Add Car");
+            addVehicle.setText("Add Car");
+        }
+        else if(type==2) {
+            setTitle("Add Motorcycle");
+            addVehicle.setText("Add Motorcycle");
+        }
+        else {
+            setTitle("Add Vehicle");
+            addVehicle.setText("Add Vehicle");
+        }
     }
 
-    public void onAddCar(View view) {
+    public void onAddVehicle(View view) {
         VehicleManager vehicleManager = new VehicleManager();
-
-        EditText brand = (EditText) findViewById(R.id.brand_field);
-        EditText model = (EditText) findViewById(R.id.model_field);
-        EditText displacement = (EditText) findViewById(R.id.displacement_field);
-        EditText year = (EditText) findViewById(R.id.year_field);
-        EditText registration = (EditText) findViewById(R.id.registration_field);
 
         String brand_value = brand.getText().toString();
         String model_value = model.getText().toString();
@@ -78,11 +103,16 @@ public class AddCar extends AppCompatActivity {
         newRevision = new InsuranceInspectionTaxRevision(revisionDate,revisionValue);
         tax.add(newRevision);
 
-        Vehicle newVehicle = new Vehicle(1,brand_value,model_value,displacement_value,year_value,registration_value,insurance,inspection,tax,revision);
+        Vehicle newVehicle = new Vehicle(type,brand_value,model_value,displacement_value,year_value,registration_value,insurance,inspection,tax,revision);
         Toast.makeText(getApplicationContext(), newVehicle.getType()+"\n"+newVehicle.getBrand()+"\n"+newVehicle.getModel(), Toast.LENGTH_SHORT).show();
         if(!brand_value.equals("")&&!model_value.equals("")&&!registration_value.equals("")) {
             if (vehicleManager.addVehicle(getApplicationContext(), newVehicle)) {
-                Toast.makeText(getApplicationContext(), "Car added successfully.", Toast.LENGTH_SHORT).show();
+                if(type==1)
+                    Toast.makeText(getApplicationContext(), "Car added successfully.", Toast.LENGTH_SHORT).show();
+                else if(type==2)
+                    Toast.makeText(getApplicationContext(), "Motorcycle added successfully.", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(getApplicationContext(), "Vehicle added successfully.", Toast.LENGTH_SHORT).show();
                 finish();
             }
             else

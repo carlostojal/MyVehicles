@@ -106,8 +106,8 @@ public class VehicleManager {
         }
     }
 
-    public ArrayList<Vehicle> loadCars(Context context) {
-        ArrayList<Vehicle> cars = new ArrayList<>();
+    public ArrayList<Vehicle> loadVehicles(Context context, int searchedType) {
+        ArrayList<Vehicle> vehicles = new ArrayList<>();
         File file = new File(context.getFilesDir(),"vehicles.csv");
 
         try {
@@ -129,10 +129,7 @@ public class VehicleManager {
             ArrayList<InsuranceInspectionTaxRevision> tax = new ArrayList<>();
             int nrevisions;
             ArrayList<InsuranceInspectionTaxRevision> revision = new ArrayList<>();
-            StringBuilder stringBuilder = new StringBuilder();
             while((line=bufferedReader.readLine())!=null) {
-                stringBuilder.append(line);
-                stringBuilder.append("\n");
                 String[] splitStr = line.split("; ");
                 type = Integer.parseInt(splitStr[0]);
                 brand = splitStr[1];
@@ -199,28 +196,16 @@ public class VehicleManager {
                     else break;
                 }
 
-                if(type==1) {
+                if(type==searchedType) {
                     Vehicle vehicle = new Vehicle(type, brand, model, displacement, year, registration, insurance, inspection, tax, revision);
-                    cars.add(vehicle);
+                    vehicles.add(vehicle);
                 }
-                Toast.makeText(context, stringBuilder, Toast.LENGTH_SHORT).show();
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return cars;
+        return vehicles;
     }
-
-    public ArrayList<Vehicle> loadMotorcycles(Context context) {
-        ArrayList<Vehicle> motorcycles = new ArrayList<>();
-        return motorcycles;
-    }
-
-    public ArrayList<Vehicle> loadOthers(Context context) {
-        ArrayList<Vehicle> others = new ArrayList<>();
-        return others;
-    }
-
 }

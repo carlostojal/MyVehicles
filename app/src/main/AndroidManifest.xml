@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".AddCar"
+            android:name=".AddVehicle"
             android:label="@string/title_activity_add_car"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity

@@ -7,8 +7,7 @@ package com.carlostojal.myvehicles;
 // github.com/carlostojal/MyVehicles
 //
 
-import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,17 +15,46 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class Motorcycles extends Fragment {
 
-    ArrayList<Vehicle> motorcycles;
+    private ListView motorcycleList;
+    private VehicleManager vehicleManager = new VehicleManager();
+    private ArrayList<Vehicle> motorcycles;
+    private Button addMotorcycle;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_motorcycles, container, false);
 
+        motorcycles = vehicleManager.loadVehicles(getContext(),2);
+        if(motorcycles.size()==0)
+            Toast.makeText(getContext(), "No motorcycles were found.", Toast.LENGTH_SHORT).show();
+
+        motorcycleList = view.findViewById(R.id.motorcycles_list);
+        ArrayAdapter motorcycleAdapter = new MotorcycleAdapter(getContext(),motorcycles);
+        motorcycleList.setAdapter(motorcycleAdapter);
+
+        addMotorcycle = (Button) view.findViewById(R.id.add_motorcycle);
+        addMotorcycle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onAddMotorcycle();
+            }
+        });
+
         return view;
+    }
+
+    public void onAddMotorcycle() {
+        Intent intent = new Intent(getContext(), AddVehicle.class);
+        intent.putExtra("type",2);
+        startActivity(intent);
     }
 }
