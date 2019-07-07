@@ -101,10 +101,10 @@ public class AddVehicle extends AppCompatActivity {
         Date revisionDate = new Date(0,0,0);
         float revisionValue = 0;
         newRevision = new InsuranceInspectionTaxRevision(revisionDate,revisionValue);
-        tax.add(newRevision);
+        revision.add(newRevision);
 
         Vehicle newVehicle = new Vehicle(type,brand_value,model_value,displacement_value,year_value,registration_value,insurance,inspection,tax,revision);
-        Toast.makeText(getApplicationContext(), newVehicle.getType()+"\n"+newVehicle.getBrand()+"\n"+newVehicle.getModel(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), newVehicle.getType()+"\n"+newVehicle.getBrand()+"\n"+newVehicle.getModel(), Toast.LENGTH_SHORT).show();
         if(!brand_value.equals("")&&!model_value.equals("")&&!registration_value.equals("")) {
             if (vehicleManager.addVehicle(getApplicationContext(), newVehicle)) {
                 if(type==1)
@@ -119,7 +119,7 @@ public class AddVehicle extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Error. Please try again.", Toast.LENGTH_SHORT).show();
         }
         else
-            Toast.makeText(getApplicationContext(), "No obligatory field can be left empty.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Obligatory field's can't be left empty.", Toast.LENGTH_SHORT).show();
     }
 
 }

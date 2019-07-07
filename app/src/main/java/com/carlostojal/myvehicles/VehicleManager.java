@@ -190,7 +190,7 @@ public class VehicleManager {
                     Date revisionDate = new Date(dateDay,dateMonth,dateYear);
                     value = Float.parseFloat(splitStr[j+3]);
                     InsuranceInspectionTaxRevision newRevision = new InsuranceInspectionTaxRevision(revisionDate,value);
-                    tax.add(newRevision);
+                    revision.add(newRevision);
                     if(j+4<splitStr.length)
                         j+=4;
                     else break;
