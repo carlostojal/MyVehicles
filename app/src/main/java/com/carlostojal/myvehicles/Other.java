@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -48,6 +49,17 @@ public class Other extends Fragment {
             @Override
             public void onClick(View view) {
                 onAddOther();
+            }
+        });
+
+        otherList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Vehicle selectedVehicle = (Vehicle) adapterView.getItemAtPosition(i);
+                Intent intent = new Intent(Other.this.getActivity(), VehicleDetails.class);
+                intent.putExtra("registration",selectedVehicle.getRegistration());
+                intent.putExtra("type",3);
+                startActivity(intent);
             }
         });
 

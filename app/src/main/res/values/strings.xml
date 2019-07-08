@@ -5,8 +5,16 @@
     <string name="add_vehicle">Add Vehicle</string>
     <string name="title_activity_add_car">AddCar</string>
     <string name="brand">Brand (obligatory):</string>
+    <string name="brand1">Brand:</string>
     <string name="model">Model (obligatory):</string>
+    <string name="model1">Model:</string>
     <string name="displacement">Displacement:</string>
     <string name="year">Year:</string>
     <string name="registration">Registration (obligatory):</string>
+    <string name="registration1">Registration</string>
+    <string name="insurances">Insurances</string>
+    <string name="inspections">inspections</string>
+    <string name="taxes">Taxes</string>
+    <string name="revisions">Revisions</string>
+    <string name="title_activity_vehicle_details">VehicleDetails</string>
 </resources>
