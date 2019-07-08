@@ -7,6 +7,7 @@ package com.carlostojal.myvehicles;
 // github.com/carlostojal/MyVehicles
 //
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -25,6 +26,9 @@ public class VehicleDetails extends AppCompatActivity {
     ArrayList<Vehicle> vehicles;
     Vehicle vehicle;
     VehicleManager vehicleManager;
+
+    int type;
+    String registration_value;
 
     TextView brand;
     TextView model;
@@ -46,12 +50,12 @@ public class VehicleDetails extends AppCompatActivity {
         vehicleManager = new VehicleManager();
 
         Bundle extras = getIntent().getExtras();
-        String searchedRegistration = extras.getString("registration");
-        int searchedType = extras.getInt("type");
-        vehicles = vehicleManager.loadVehicles(getApplicationContext(),searchedType);
+        registration_value = extras.getString("registration");
+        type = extras.getInt("type");
+        vehicles = vehicleManager.loadVehicles(getApplicationContext(),type);
         for(int i=0;i<vehicles.size();i++) {
             //searches selected vehicle in the list
-            if(vehicles.get(i).getRegistration().equals(searchedRegistration)) {
+            if(vehicles.get(i).getRegistration().equals(registration_value)) {
                 vehicle = vehicles.get(i);
                 break;
             }
@@ -64,5 +68,37 @@ public class VehicleDetails extends AppCompatActivity {
         displacement.setText(String.valueOf(vehicle.getDisplacement()));
         year.setText(String.valueOf(vehicle.getYear()));
         registration.setText(vehicle.getRegistration().toString());
+    }
+
+    public void onInsurances(View view) {
+        Intent intent = new Intent(VehicleDetails.this,InsurancesInspectionsTaxesRevisions.class);
+        intent.putExtra("vehicleType",type);
+        intent.putExtra("registration",registration_value);
+        intent.putExtra("type",1); //1 -> insurances
+        startActivity(intent);
+    }
+
+    public void onInspections(View view) {
+        Intent intent = new Intent(VehicleDetails.this,InsurancesInspectionsTaxesRevisions.class);
+        intent.putExtra("vehicleType",type);
+        intent.putExtra("registration",registration_value);
+        intent.putExtra("type",2); //2 -> inspections
+        startActivity(intent);
+    }
+
+    public void onTaxes(View view) {
+        Intent intent = new Intent(VehicleDetails.this,InsurancesInspectionsTaxesRevisions.class);
+        intent.putExtra("vehicleType",type);
+        intent.putExtra("registration",registration_value);
+        intent.putExtra("type",3); //3 -> taxes
+        startActivity(intent);
+    }
+
+    public void onRevisions(View view) {
+        Intent intent = new Intent(VehicleDetails.this,InsurancesInspectionsTaxesRevisions.class);
+        intent.putExtra("vehicleType",type);
+        intent.putExtra("registration",registration_value);
+        intent.putExtra("type",4); //4 -> revisions
+        startActivity(intent);
     }
 }

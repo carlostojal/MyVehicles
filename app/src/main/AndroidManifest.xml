@@ -10,9 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".AddInsuranceInspectionTaxRevision"
+            android:label="@string/title_activity_add_insurance_inspection_tax"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".InsurancesInspectionsTaxesRevisions"
+            android:label="@string/title_activity_insurances_inspections_taxes_revisions"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".VehicleDetails"
             android:label="@string/title_activity_vehicle_details"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AddVehicle"
             android:label="@string/title_activity_add_car"
