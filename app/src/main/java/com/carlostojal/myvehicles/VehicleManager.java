@@ -122,15 +122,15 @@ public class VehicleManager {
             int year;
             String registration;
             int ninsurances;
-            ArrayList<InsuranceInspectionTaxRevision> insurance = new ArrayList<>();
             int ninspections;
-            ArrayList<InsuranceInspectionTaxRevision> inspection = new ArrayList<>();
             int ntaxes;
-            ArrayList<InsuranceInspectionTaxRevision> tax = new ArrayList<>();
             int nrevisions;
-            ArrayList<InsuranceInspectionTaxRevision> revision = new ArrayList<>();
             while((line=bufferedReader.readLine())!=null) {
                 String[] splitStr = line.split("; ");
+                ArrayList<InsuranceInspectionTaxRevision> insurance = new ArrayList<>();
+                ArrayList<InsuranceInspectionTaxRevision> inspection = new ArrayList<>();
+                ArrayList<InsuranceInspectionTaxRevision> tax = new ArrayList<>();
+                ArrayList<InsuranceInspectionTaxRevision> revision = new ArrayList<>();
                 type = Integer.parseInt(splitStr[0]);
                 brand = splitStr[1];
                 model = splitStr[2];

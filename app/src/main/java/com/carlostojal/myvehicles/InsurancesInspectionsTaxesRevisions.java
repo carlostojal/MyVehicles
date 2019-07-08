@@ -26,6 +26,7 @@ public class InsurancesInspectionsTaxesRevisions extends AppCompatActivity {
 
     ArrayList<Vehicle> vehicles;
     Vehicle vehicle;
+    int type;
 
     TextView label;
     TextView history;
@@ -45,7 +46,7 @@ public class InsurancesInspectionsTaxesRevisions extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         String registration = extras.getString("registration"); //vehicle registration
         int vehicleType = extras.getInt("vehicleType");
-        int type = extras.getInt("type");
+        type = extras.getInt("type");
         vehicles = vehicleManager.loadVehicles(getApplicationContext(),vehicleType);
         for(int i=0;i<vehicles.size();i++) {
             if(vehicles.get(i).getRegistration().equals(registration))
@@ -66,6 +67,7 @@ public class InsurancesInspectionsTaxesRevisions extends AppCompatActivity {
                     insurancesInspectionsTaxesRevisions.append(String.valueOf(vehicle.getInsurance().get(i).getDate().getYear()));
                     insurancesInspectionsTaxesRevisions.append(" - ");
                     insurancesInspectionsTaxesRevisions.append(String.valueOf(vehicle.getInsurance().get(i).getValue()));
+                    insurancesInspectionsTaxesRevisions.append("\n");
                 }
             }
             if(vehicle.getInsurance().size()==1&&vehicle.getInsurance().get(0).getDate().getDay()==0) {
@@ -79,8 +81,8 @@ public class InsurancesInspectionsTaxesRevisions extends AppCompatActivity {
             label.setText("Vehicle inspection history:");
             add.setText("Register inspection");
 
-            for(int i=0;i<vehicle.getInsurance().size();i++) {
-                if(vehicle.getInsurance().get(i).getDate().getDay()!=0) {
+            for(int i=0;i<vehicle.getInspection().size();i++) {
+                if(vehicle.getInspection().get(i).getDate().getDay()!=0) {
                     insurancesInspectionsTaxesRevisions.append("• ");
                     insurancesInspectionsTaxesRevisions.append(String.valueOf(vehicle.getInspection().get(i).getDate().getDay()));
                     insurancesInspectionsTaxesRevisions.append("/");
@@ -89,6 +91,7 @@ public class InsurancesInspectionsTaxesRevisions extends AppCompatActivity {
                     insurancesInspectionsTaxesRevisions.append(String.valueOf(vehicle.getInspection().get(i).getDate().getYear()));
                     insurancesInspectionsTaxesRevisions.append(" - ");
                     insurancesInspectionsTaxesRevisions.append(String.valueOf(vehicle.getInspection().get(i).getValue()));
+                    insurancesInspectionsTaxesRevisions.append("\n");
                 }
             }
             if(vehicle.getInspection().size()==1&&vehicle.getInspection().get(0).getDate().getDay()==0) {
@@ -102,8 +105,8 @@ public class InsurancesInspectionsTaxesRevisions extends AppCompatActivity {
             label.setText("Vehicle tax history:");
             add.setText("Register tax");
 
-            for(int i=0;i<vehicle.getInsurance().size();i++) {
-                if(vehicle.getInsurance().get(i).getDate().getDay()!=0) {
+            for(int i=0;i<vehicle.getTax().size();i++) {
+                if(vehicle.getTax().get(i).getDate().getDay()!=0) {
                     insurancesInspectionsTaxesRevisions.append("• ");
                     insurancesInspectionsTaxesRevisions.append(String.valueOf(vehicle.getTax().get(i).getDate().getDay()));
                     insurancesInspectionsTaxesRevisions.append("/");
@@ -112,6 +115,8 @@ public class InsurancesInspectionsTaxesRevisions extends AppCompatActivity {
                     insurancesInspectionsTaxesRevisions.append(String.valueOf(vehicle.getTax().get(i).getDate().getYear()));
                     insurancesInspectionsTaxesRevisions.append(" - ");
                     insurancesInspectionsTaxesRevisions.append(String.valueOf(vehicle.getTax().get(i).getValue()));
+                    insurancesInspectionsTaxesRevisions.append("\n");
+
                 }
             }
             if(vehicle.getTax().size()==1&&vehicle.getTax().get(0).getDate().getDay()==0) {
@@ -125,8 +130,8 @@ public class InsurancesInspectionsTaxesRevisions extends AppCompatActivity {
             label.setText("Vehicle revision history:");
             add.setText("Register revision");
 
-            for(int i=0;i<vehicle.getInsurance().size();i++) {
-                if(vehicle.getInsurance().get(i).getDate().getDay()!=0) {
+            for(int i=0;i<vehicle.getRevision().size();i++) {
+                if(vehicle.getRevision().get(i).getDate().getDay()!=0) {
                     insurancesInspectionsTaxesRevisions.append("• ");
                     insurancesInspectionsTaxesRevisions.append(String.valueOf(vehicle.getRevision().get(i).getDate().getDay()));
                     insurancesInspectionsTaxesRevisions.append("/");
@@ -135,6 +140,7 @@ public class InsurancesInspectionsTaxesRevisions extends AppCompatActivity {
                     insurancesInspectionsTaxesRevisions.append(String.valueOf(vehicle.getRevision().get(i).getDate().getYear()));
                     insurancesInspectionsTaxesRevisions.append(" - ");
                     insurancesInspectionsTaxesRevisions.append(String.valueOf(vehicle.getRevision().get(i).getValue()));
+                    insurancesInspectionsTaxesRevisions.append("\n");
                 }
             }
             if(vehicle.getRevision().size()==1&&vehicle.getRevision().get(0).getDate().getDay()==0) {
@@ -147,6 +153,9 @@ public class InsurancesInspectionsTaxesRevisions extends AppCompatActivity {
 
     public void onRegister(View view) {
         Intent intent = new Intent(InsurancesInspectionsTaxesRevisions.this,AddInsuranceInspectionTaxRevision.class);
+        intent.putExtra("registration",vehicle.getRegistration());
+        intent.putExtra("vehicleType",vehicle.getType());
+        intent.putExtra("type",type);
         startActivity(intent);
     }
 }

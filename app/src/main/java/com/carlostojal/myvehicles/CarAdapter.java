@@ -49,7 +49,7 @@ public class CarAdapter extends ArrayAdapter<Vehicle> {
 
         StringBuilder insurance_text = new StringBuilder();
         insurance_text.append("Last insurance: ");
-        if (cars.get(position).getInsurance().get(cars.get(position).getInsurance().size() - 1).getDate().getDay() != 0) {
+        if (cars.get(position).getInsurance().get(cars.get(position).getInsurance().size()-1).getDate().getDay()!=0) {
             insurance_text.append(String.valueOf(cars.get(position).getInsurance().get(cars.get(position).getInsurance().size() - 1).getDate().getDay()));
             insurance_text.append("/");
             insurance_text.append(String.valueOf(cars.get(position).getInsurance().get(cars.get(position).getInsurance().size() - 1).getDate().getMonth()));

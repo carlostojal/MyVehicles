@@ -16,6 +16,7 @@
     <string name="inspections">inspections</string>
     <string name="taxes">Taxes</string>
     <string name="revisions">Revisions</string>
+    <string name="value">Value:</string>
     <string name="title_activity_vehicle_details">VehicleDetails</string>
     <string name="title_activity_insurances_inspections_taxes_revisions">
         InsurancesInspectionsTaxesRevisions
