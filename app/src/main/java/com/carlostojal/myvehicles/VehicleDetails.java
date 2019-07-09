@@ -65,8 +65,14 @@ public class VehicleDetails extends AppCompatActivity {
 
         brand.setText(vehicle.getBrand().toString());
         model.setText(vehicle.getModel().toString());
-        displacement.setText(String.valueOf(vehicle.getDisplacement()));
-        year.setText(String.valueOf(vehicle.getYear()));
+        if(vehicle.getDisplacement()!=0)
+            displacement.setText(String.valueOf(vehicle.getDisplacement()));
+        else
+            displacement.setText("No information.");
+        if(vehicle.getYear()!=0)
+            year.setText(String.valueOf(vehicle.getYear()));
+        else
+            year.setText("No information.");
         registration.setText(vehicle.getRegistration().toString());
     }
 

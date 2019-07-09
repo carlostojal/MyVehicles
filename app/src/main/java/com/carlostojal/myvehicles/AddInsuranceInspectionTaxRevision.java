@@ -58,22 +58,22 @@ public class AddInsuranceInspectionTaxRevision extends AppCompatActivity {
         }
 
         if(type==1) {
-            label.setText("Insurance value:");
+            label.setText("Insurance cost:");
             add.setText("Register insurance");
         }
 
         else if(type==2) {
-            label.setText("Inspection value:");
+            label.setText("Inspection cost:");
             add.setText("Register inspection");
         }
 
         else if(type==3) {
-            label.setText("Tax value:");
+            label.setText("Tax cost:");
             add.setText("Register tax");
         }
 
         else {
-            label.setText("Revision value:");
+            label.setText("Revision cost:");
             add.setText("Register revision");
         }
     }
@@ -82,45 +82,46 @@ public class AddInsuranceInspectionTaxRevision extends AppCompatActivity {
         ArrayList<InsuranceInspectionTaxRevision> list;
         Calendar calendar = Calendar.getInstance();
         Date date = new Date(calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.MONTH), calendar.get(Calendar.YEAR));
-        InsuranceInspectionTaxRevision newRegister = new InsuranceInspectionTaxRevision(date, Integer.parseInt(value.getText().toString()));
+        if(!value.getText().toString().equals("")) {
+            InsuranceInspectionTaxRevision newRegister = new InsuranceInspectionTaxRevision(date, Integer.parseInt(value.getText().toString()));
 
-        if (type == 1) {
-            list = vehicle.getInsurance();
-            list.add(newRegister);
-            vehicle.setInsurance(list);
-        }
-        else if (type == 2) {
-            list = vehicle.getInspection();
-            list.add(newRegister);
-            vehicle.setInspection(list);
-        }
-        else if (type == 3) {
-            list = vehicle.getTax();
-            list.add(newRegister);
-            vehicle.setTax(list);
-        }
-        else {
-            list = vehicle.getRevision();
-            list.add(newRegister);
-            vehicle.setRevision(list);
-        }
+            if (type == 1) {
+                list = vehicle.getInsurance();
+                list.add(newRegister);
+                vehicle.setInsurance(list);
+            } else if (type == 2) {
+                list = vehicle.getInspection();
+                list.add(newRegister);
+                vehicle.setInspection(list);
+            } else if (type == 3) {
+                list = vehicle.getTax();
+                list.add(newRegister);
+                vehicle.setTax(list);
+            } else {
+                list = vehicle.getRevision();
+                list.add(newRegister);
+                vehicle.setRevision(list);
+            }
 
-        vehicleManager.cleanVehicles(getApplicationContext());
-        vehicleManager.addVehicle(getApplicationContext(),vehicle);
+            vehicleManager.cleanVehicles(getApplicationContext());
+            vehicleManager.addVehicle(getApplicationContext(), vehicle);
 
-        for(int i=0;i<vehicles.size();i++) {
-            if(!vehicles.get(i).getRegistration().equals(vehicle.getRegistration()))
-                vehicleManager.addVehicle(getApplicationContext(),vehicles.get(i));
+            for (int i = 0; i < vehicles.size(); i++) {
+                if (!vehicles.get(i).getRegistration().equals(vehicle.getRegistration()))
+                    vehicleManager.addVehicle(getApplicationContext(), vehicles.get(i));
+            }
+
+            if (type == 1)
+                Toast.makeText(getApplicationContext(), "Insurance registered successfully.", Toast.LENGTH_SHORT).show();
+            if (type == 2)
+                Toast.makeText(getApplicationContext(), "Inspection registered successfully.", Toast.LENGTH_SHORT).show();
+            if (type == 3)
+                Toast.makeText(getApplicationContext(), "Tax registered successfully.", Toast.LENGTH_SHORT).show();
+            if (type == 4)
+                Toast.makeText(getApplicationContext(), "Revision registered successfully.", Toast.LENGTH_SHORT).show();
+            finish();
         }
-
-        if(type == 1)
-            Toast.makeText(getApplicationContext(), "Insurance registered successfully.", Toast.LENGTH_SHORT).show();
-        if(type == 2)
-            Toast.makeText(getApplicationContext(), "Inspection registered successfully.", Toast.LENGTH_SHORT).show();
-        if(type == 3)
-            Toast.makeText(getApplicationContext(), "Tax registered successfully.", Toast.LENGTH_SHORT).show();
-        if(type == 4)
-            Toast.makeText(getApplicationContext(), "Revision registered successfully.", Toast.LENGTH_SHORT).show();
-        finish();
+        else
+            Toast.makeText(getApplicationContext(), "Cost field can't be left empty.", Toast.LENGTH_SHORT).show();
     }
 }
