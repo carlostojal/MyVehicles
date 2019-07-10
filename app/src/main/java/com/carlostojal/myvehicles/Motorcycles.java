@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -32,35 +33,47 @@ public class Motorcycles extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_motorcycles, container, false);
-
+        View view;
         motorcycles = vehicleManager.loadVehicles(getContext(),2);
-        if(motorcycles.size()==0)
-            Toast.makeText(getContext(), "No motorcycles were found.", Toast.LENGTH_SHORT).show();
+        if(motorcycles.size()==0) {
+            view = inflater.inflate(R.layout.empty_list, container, false);
 
-        motorcycleList = view.findViewById(R.id.motorcycles_list);
-        ArrayAdapter motorcycleAdapter = new MotorcycleAdapter(getContext(),motorcycles);
-        motorcycleList.setAdapter(motorcycleAdapter);
+            TextView label = (TextView) view.findViewById(R.id.textView);
+            label.setText("No motorcycles were found.");
+            addMotorcycle = (Button) view.findViewById(R.id.button);
+            addMotorcycle.setText("Add motorcycle");
+            addMotorcycle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onAddMotorcycle();
+                }
+            });
+        }
+        else {
+            view = inflater.inflate(R.layout.fragment_motorcycles, container, false);
+            motorcycleList = view.findViewById(R.id.motorcycles_list);
+            ArrayAdapter motorcycleAdapter = new MotorcycleAdapter(getContext(), motorcycles);
+            motorcycleList.setAdapter(motorcycleAdapter);
 
-        addMotorcycle = (Button) view.findViewById(R.id.add_motorcycle);
-        addMotorcycle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onAddMotorcycle();
-            }
-        });
+            addMotorcycle = (Button) view.findViewById(R.id.add_motorcycle);
+            addMotorcycle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onAddMotorcycle();
+                }
+            });
 
-        motorcycleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Vehicle selectedVehicle = (Vehicle) adapterView.getItemAtPosition(i);
-                Intent intent = new Intent(Motorcycles.this.getActivity(), VehicleDetails.class);
-                intent.putExtra("registration",selectedVehicle.getRegistration());
-                intent.putExtra("type",2);
-                startActivity(intent);
-            }
-        });
-
+            motorcycleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Vehicle selectedVehicle = (Vehicle) adapterView.getItemAtPosition(i);
+                    Intent intent = new Intent(Motorcycles.this.getActivity(), VehicleDetails.class);
+                    intent.putExtra("registration", selectedVehicle.getRegistration());
+                    intent.putExtra("type", 2);
+                    startActivity(intent);
+                }
+            });
+        }
         return view;
     }
 

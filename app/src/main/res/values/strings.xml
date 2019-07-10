@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">MyVehicles</string>
+    <string name="no_cars">No cars were found.</string>
+    <string name="no_motorcycles">No motorcycles were found.</string>
+    <string name="no_vehicles">No vehicles were found.</string>
     <string name="add_car">Add Car</string>
     <string name="add_motorcycle">Add Motorcycle</string>
     <string name="add_vehicle">Add Vehicle</string>
