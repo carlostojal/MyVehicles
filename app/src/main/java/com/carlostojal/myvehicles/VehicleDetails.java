@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class VehicleDetails extends AppCompatActivity {
 
@@ -39,7 +40,10 @@ public class VehicleDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vehicle_details);
+        if(Locale.getDefault().getLanguage().equals("pt"))
+            setContentView(R.layout.activity_vehicle_details_pt);
+        else
+            setContentView(R.layout.activity_vehicle_details);
 
         brand = (TextView) findViewById(R.id.brand_value_details);
         model = (TextView) findViewById(R.id.model_value_details);
@@ -67,12 +71,20 @@ public class VehicleDetails extends AppCompatActivity {
         model.setText(vehicle.getModel().toString());
         if(vehicle.getDisplacement()!=0)
             displacement.setText(String.valueOf(vehicle.getDisplacement()));
-        else
-            displacement.setText("No information.");
+        else {
+            if(Locale.getDefault().getLanguage().equals("pt"))
+                displacement.setText("Sem informação.");
+            else
+                displacement.setText("No information.");
+        }
         if(vehicle.getYear()!=0)
             year.setText(String.valueOf(vehicle.getYear()));
-        else
-            year.setText("No information.");
+        else {
+            if(Locale.getDefault().getLanguage().equals("pt"))
+                year.setText("Sem informação.");
+            else
+                year.setText("No information.");
+        }
         registration.setText(vehicle.getRegistration().toString());
     }
 

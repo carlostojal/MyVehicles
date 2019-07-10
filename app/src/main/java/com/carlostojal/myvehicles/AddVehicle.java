@@ -7,6 +7,7 @@ package com.carlostojal.myvehicles;
 // github.com/carlostojal/MyVehicles
 //
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class AddVehicle extends AppCompatActivity {
 
@@ -31,7 +33,10 @@ public class AddVehicle extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_vehicle);
+        if(Locale.getDefault().getLanguage().equals("pt"))
+            setContentView(R.layout.activity_add_vehicle_pt);
+        else
+            setContentView(R.layout.activity_add_vehicle);
 
         brand = (EditText) findViewById(R.id.brand_field);
         model = (EditText) findViewById(R.id.model_field);
@@ -45,16 +50,34 @@ public class AddVehicle extends AppCompatActivity {
             type = extras.getInt("type");
 
         if(type==1) {
-            setTitle("Add Car");
-            addVehicle.setText("Add Car");
+            if(Locale.getDefault().getLanguage().equals("pt")) {
+                setTitle("Adicionar Carro");
+                addVehicle.setText("Adicionar Carro");
+            }
+            else {
+                setTitle("Add Car");
+                addVehicle.setText("Add Car");
+            }
         }
         else if(type==2) {
-            setTitle("Add Motorcycle");
-            addVehicle.setText("Add Motorcycle");
+            if(Locale.getDefault().getLanguage().equals("pt")) {
+                setTitle("Adicionar Motociclo");
+                addVehicle.setText("Adicionar Motociclo");
+            }
+            else {
+                setTitle("Add Motorcycle");
+                addVehicle.setText("Add Motorcycle");
+            }
         }
         else {
-            setTitle("Add Vehicle");
-            addVehicle.setText("Add Vehicle");
+            if(Locale.getDefault().getLanguage().equals("pt")) {
+                setTitle("Adicionar Veículo");
+                addVehicle.setText("Adicionar Veículo");
+            }
+            else {
+                setTitle("Add Vehicle");
+                addVehicle.setText("Add Vehicle");
+            }
         }
     }
 
@@ -107,19 +130,41 @@ public class AddVehicle extends AppCompatActivity {
         //Toast.makeText(getApplicationContext(), newVehicle.getType()+"\n"+newVehicle.getBrand()+"\n"+newVehicle.getModel(), Toast.LENGTH_SHORT).show();
         if(!brand_value.equals("")&&!model_value.equals("")&&!registration_value.equals("")) {
             if (vehicleManager.addVehicle(getApplicationContext(), newVehicle)) {
-                if(type==1)
-                    Toast.makeText(getApplicationContext(), "Car added successfully.", Toast.LENGTH_SHORT).show();
-                else if(type==2)
-                    Toast.makeText(getApplicationContext(), "Motorcycle added successfully.", Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(getApplicationContext(), "Vehicle added successfully.", Toast.LENGTH_SHORT).show();
+                if(type==1) {
+                    if(Locale.getDefault().getLanguage().equals("pt"))
+                        Toast.makeText(getApplicationContext(), "Carro adicionado com sucesso.", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(getApplicationContext(), "Car added successfully.", Toast.LENGTH_SHORT).show();
+                }
+                else if(type==2) {
+                    if(Locale.getDefault().getLanguage().equals("pt"))
+                        Toast.makeText(getApplicationContext(), "Motociclo adicionado com sucesso.", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(getApplicationContext(), "Motorcycle added successfully.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    if(Locale.getDefault().getLanguage().equals("pt"))
+                        Toast.makeText(getApplicationContext(), "Veículo adicionado com sucesso.", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(getApplicationContext(), "Vehicle added successfully.", Toast.LENGTH_SHORT).show();
+                }
+                Intent intent = new Intent(AddVehicle.this,MainActivity.class);
+                startActivity(intent);
                 finish();
             }
-            else
-                Toast.makeText(getApplicationContext(), "Error. Please try again.", Toast.LENGTH_SHORT).show();
+            else {
+                if(Locale.getDefault().getLanguage().equals("pt"))
+                    Toast.makeText(getApplicationContext(), "Erro. Por favor tente novamente.", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(getApplicationContext(), "Error. Please try again.", Toast.LENGTH_SHORT).show();
+            }
         }
-        else
-            Toast.makeText(getApplicationContext(), "Obligatory field's can't be left empty.", Toast.LENGTH_SHORT).show();
+        else {
+            if(Locale.getDefault().getLanguage().equals("pt"))
+                Toast.makeText(getApplicationContext(), "Campos obrigatórios não podem ser deixados em branco.", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(getApplicationContext(), "Obligatory field's can't be left empty.", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

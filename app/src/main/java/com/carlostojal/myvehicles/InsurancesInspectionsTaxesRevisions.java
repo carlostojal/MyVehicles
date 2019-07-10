@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class InsurancesInspectionsTaxesRevisions extends AppCompatActivity {
 
@@ -53,9 +54,16 @@ public class InsurancesInspectionsTaxesRevisions extends AppCompatActivity {
                 vehicle = vehicles.get(i);
         }
         if(type==1) { //insurance
-            setTitle("Insurances");
-            label.setText("Vehicle insurance history:");
-            add.setText("Register insurance");
+            if(Locale.getDefault().getLanguage().equals("pt")) {
+                setTitle("Seguros");
+                label.setText("Histórico de seguro do veículo:");
+                add.setText("Registar seguro");
+            }
+            else {
+                setTitle("Insurances");
+                label.setText("Vehicle insurance history:");
+                add.setText("Register insurance");
+            }
 
             for(int i=0;i<vehicle.getInsurance().size();i++) {
                 if(vehicle.getInsurance().get(i).getDate().getDay()!=0) {
@@ -71,15 +79,25 @@ public class InsurancesInspectionsTaxesRevisions extends AppCompatActivity {
                 }
             }
             if(vehicle.getInsurance().size()==1&&vehicle.getInsurance().get(0).getDate().getDay()==0) {
-                insurancesInspectionsTaxesRevisions.append("No information.");
+                if(Locale.getDefault().getLanguage().equals("pt"))
+                    insurancesInspectionsTaxesRevisions.append("Sem informação.");
+                else
+                    insurancesInspectionsTaxesRevisions.append("No information.");
             }
 
             history.setText(insurancesInspectionsTaxesRevisions);
         }
         else if(type==2) { //inspection
-            setTitle("Inspections");
-            label.setText("Vehicle inspection history:");
-            add.setText("Register inspection");
+            if(Locale.getDefault().getLanguage().equals("pt")) {
+                setTitle("Inspeções");
+                label.setText("Histórico de inspeções do veículo:");
+                add.setText("Registar inspeção");
+            }
+            else {
+                setTitle("Inspections");
+                label.setText("Vehicle inspection history:");
+                add.setText("Register inspection");
+            }
 
             for(int i=0;i<vehicle.getInspection().size();i++) {
                 if(vehicle.getInspection().get(i).getDate().getDay()!=0) {
@@ -95,15 +113,25 @@ public class InsurancesInspectionsTaxesRevisions extends AppCompatActivity {
                 }
             }
             if(vehicle.getInspection().size()==1&&vehicle.getInspection().get(0).getDate().getDay()==0) {
-                insurancesInspectionsTaxesRevisions.append("No information.");
+                if(Locale.getDefault().getLanguage().equals("pt"))
+                    insurancesInspectionsTaxesRevisions.append("Sem informação.");
+                else
+                    insurancesInspectionsTaxesRevisions.append("No information.");
             }
 
             history.setText(insurancesInspectionsTaxesRevisions);
         }
         else if(type==3) { //tax
-            setTitle("Taxes");
-            label.setText("Vehicle tax history:");
-            add.setText("Register tax");
+            if(Locale.getDefault().getLanguage().equals("pt")) {
+                setTitle("Impostos");
+                label.setText("Histórico de impostos do veículo:");
+                add.setText("Registar imposto");
+            }
+            else {
+                setTitle("Taxes");
+                label.setText("Vehicle tax history:");
+                add.setText("Register tax");
+            }
 
             for(int i=0;i<vehicle.getTax().size();i++) {
                 if(vehicle.getTax().get(i).getDate().getDay()!=0) {
@@ -120,12 +148,20 @@ public class InsurancesInspectionsTaxesRevisions extends AppCompatActivity {
                 }
             }
             if(vehicle.getTax().size()==1&&vehicle.getTax().get(0).getDate().getDay()==0) {
-                insurancesInspectionsTaxesRevisions.append("No information.");
+                if(Locale.getDefault().getLanguage().equals("pt"))
+                    insurancesInspectionsTaxesRevisions.append("Sem informação.");
+                else
+                    insurancesInspectionsTaxesRevisions.append("No information.");
             }
 
             history.setText(insurancesInspectionsTaxesRevisions);
         }
         else if(type==4) { //revision
+            if(Locale.getDefault().getLanguage().equals("pt")) {
+                setTitle("Revisões");
+                label.setText("Histórico de revisões do veículo:");
+                add.setText("Registar revisão");
+            }
             setTitle("Revisions");
             label.setText("Vehicle revision history:");
             add.setText("Register revision");
@@ -144,7 +180,10 @@ public class InsurancesInspectionsTaxesRevisions extends AppCompatActivity {
                 }
             }
             if(vehicle.getRevision().size()==1&&vehicle.getRevision().get(0).getDate().getDay()==0) {
-                insurancesInspectionsTaxesRevisions.append("No information.");
+                if(Locale.getDefault().getLanguage().equals("pt"))
+                    insurancesInspectionsTaxesRevisions.append("Sem informação.");
+                else
+                    insurancesInspectionsTaxesRevisions.append("No information.");
             }
 
             history.setText(insurancesInspectionsTaxesRevisions);
@@ -157,5 +196,6 @@ public class InsurancesInspectionsTaxesRevisions extends AppCompatActivity {
         intent.putExtra("vehicleType",vehicle.getType());
         intent.putExtra("type",type);
         startActivity(intent);
+        finish();
     }
 }

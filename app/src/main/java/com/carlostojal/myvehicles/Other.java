@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Other extends Fragment {
 
@@ -32,6 +33,37 @@ public class Other extends Fragment {
     private VehicleManager vehicleManager = new VehicleManager();
     private ArrayList<Vehicle> others;
     private Button addOther;
+    private boolean isStarted = false;
+    private boolean isVisible = false;
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        vehicleManager = new VehicleManager();
+        isStarted = true;
+        if(isVisible&&isStarted) {
+            others = vehicleManager.loadVehicles(getContext(),3);
+            if(others.size()>0) {
+                ArrayAdapter otherAdapter = new OtherAdapter(getContext(), others);
+                otherList.setAdapter(otherAdapter);
+            }
+        }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        vehicleManager = new VehicleManager();
+        isVisible = isVisibleToUser;
+        if (isStarted && isVisible) {
+            others = vehicleManager.loadVehicles(getContext(),3);
+            if(others.size()>0) {
+                ArrayAdapter otherAdapter = new OtherAdapter(getContext(), others);
+                otherList.setAdapter(otherAdapter);
+            }
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,9 +72,15 @@ public class Other extends Fragment {
         if(others.size()==0) {
             view = inflater.inflate(R.layout.empty_list, container, false);
             TextView label = (TextView) view.findViewById(R.id.textView);
-            label.setText("No vehicles were found.");
+            if(Locale.getDefault().getLanguage().equals("pt"))
+                label.setText("Não foram encontrados veículos.");
+            else
+                label.setText("No vehicles were found.");
             addOther = (Button) view.findViewById(R.id.button);
-            addOther.setText("Add vehicle.");
+            if(Locale.getDefault().getLanguage().equals("pt"))
+                addOther.setText("Adicionar Veículo");
+            else
+                addOther.setText("Add Vehicle");
             addOther.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -51,7 +89,10 @@ public class Other extends Fragment {
             });
         }
         else {
-            view = inflater.inflate(R.layout.fragment_other, container, false);
+            if(Locale.getDefault().getLanguage().equals("pt"))
+                view = inflater.inflate(R.layout.fragment_other_pt, container, false);
+            else
+                view = inflater.inflate(R.layout.fragment_other, container, false);
             otherList = view.findViewById(R.id.other_list);
             ArrayAdapter otherAdapter = new OtherAdapter(getContext(), others);
             otherList.setAdapter(otherAdapter);
@@ -82,5 +123,6 @@ public class Other extends Fragment {
         Intent intent = new Intent(getContext(), AddVehicle.class);
         intent.putExtra("type",3);
         startActivity(intent);
+        getActivity().finish();
     }
 }

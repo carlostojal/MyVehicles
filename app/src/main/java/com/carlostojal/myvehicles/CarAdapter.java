@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class CarAdapter extends ArrayAdapter<Vehicle> {
 
@@ -48,7 +49,10 @@ public class CarAdapter extends ArrayAdapter<Vehicle> {
         registration.setText(registration_text);
 
         StringBuilder insurance_text = new StringBuilder();
-        insurance_text.append("Last insurance: ");
+        if(Locale.getDefault().getLanguage().equals("pt"))
+            insurance_text.append("Último seguro: ");
+        else
+            insurance_text.append("Last insurance: ");
         if (cars.get(position).getInsurance().get(cars.get(position).getInsurance().size()-1).getDate().getDay()!=0) {
             insurance_text.append(String.valueOf(cars.get(position).getInsurance().get(cars.get(position).getInsurance().size() - 1).getDate().getDay()));
             insurance_text.append("/");
@@ -58,12 +62,19 @@ public class CarAdapter extends ArrayAdapter<Vehicle> {
             insurance_text.append(" - ");
             insurance_text.append(String.valueOf(cars.get(position).getInsurance().get(cars.get(position).getInsurance().size() - 1).getValue()));
         }
-        else
-            insurance_text.append("No information.");
+        else {
+            if(Locale.getDefault().getLanguage().equals("pt"))
+                insurance_text.append("Sem informação.");
+            else
+                insurance_text.append("No information.");
+        }
         lastInsurance.setText(insurance_text);
 
         StringBuilder inspection_text = new StringBuilder();
-        inspection_text.append("Last inspection: ");
+        if(Locale.getDefault().getLanguage().equals("pt"))
+            inspection_text.append("Última inspeção: ");
+        else
+            inspection_text.append("Last inspection: ");
         if(cars.get(position).getInspection().get(cars.get(position).getInspection().size()-1).getDate().getDay()!=0) {
             inspection_text.append(String.valueOf(cars.get(position).getInspection().get(cars.get(position).getInspection().size() - 1).getDate().getDay()));
             inspection_text.append("/");
@@ -73,12 +84,19 @@ public class CarAdapter extends ArrayAdapter<Vehicle> {
             inspection_text.append(" - ");
             inspection_text.append(String.valueOf(cars.get(position).getInspection().get(cars.get(position).getInspection().size() - 1).getValue()));
         }
-        else
-            inspection_text.append("No information.");
+        else {
+            if(Locale.getDefault().getLanguage().equals("pt"))
+                inspection_text.append("Sem informação.");
+            else
+                inspection_text.append("No information.");
+        }
         lastInspection.setText(inspection_text);
 
         StringBuilder tax_text = new StringBuilder();
-        tax_text.append("Last tax: ");
+        if(Locale.getDefault().getLanguage().equals("pt"))
+            tax_text.append("Último imposto: ");
+        else
+            tax_text.append("Last tax: ");
         if(cars.get(position).getTax().get(cars.get(position).getTax().size()-1).getDate().getDay()!=0) {
             tax_text.append(String.valueOf(cars.get(position).getTax().get(cars.get(position).getTax().size() - 1).getDate().getDay()));
             tax_text.append("/");
@@ -88,12 +106,19 @@ public class CarAdapter extends ArrayAdapter<Vehicle> {
             tax_text.append(" - ");
             tax_text.append(String.valueOf(cars.get(position).getTax().get(cars.get(position).getTax().size() - 1).getValue()));
         }
-        else
-            tax_text.append("No information.");
+        else {
+            if(Locale.getDefault().getLanguage().equals("pt"))
+                tax_text.append("Sem informação.");
+            else
+                tax_text.append("No information.");
+        }
         lastTax.setText(tax_text);
 
         StringBuilder revision_text = new StringBuilder();
-        revision_text.append("Last revision: ");
+        if(Locale.getDefault().getLanguage().equals("pt"))
+            revision_text.append("Última revisão: ");
+        else
+            revision_text.append("Last revision: ");
         if(cars.get(position).getRevision().get(cars.get(position).getRevision().size()-1).getDate().getDay()!=0) {
             revision_text.append(String.valueOf(cars.get(position).getRevision().get(cars.get(position).getRevision().size() - 1).getDate().getDay()));
             revision_text.append("/");
@@ -103,8 +128,12 @@ public class CarAdapter extends ArrayAdapter<Vehicle> {
             revision_text.append(" - ");
             revision_text.append(String.valueOf(cars.get(position).getRevision().get(cars.get(position).getRevision().size() - 1).getValue()));
         }
-        else
-            revision_text.append("No information.");
+        else {
+            if(Locale.getDefault().getLanguage().equals("pt"))
+                revision_text.append("Sem informação.");
+            else
+                revision_text.append("No information.");
+        }
         lastRevision.setText(revision_text);
 
         return rowView;
